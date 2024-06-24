@@ -1,7 +1,7 @@
 import { styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 const months = [
-  { value: 1, label: '1 Mois', discount: 0 },
+  { value: 1, label: '1 Mois' },
   { value: 2, label: '3 Mois', discount: 20 },
   { value: 6, label: '6 Mois', discount: 30 },
   { value: 12, label: '12 Mois', discount: 40 },
@@ -27,8 +27,7 @@ export default function BillingCycleSelection({ billingCycle, setBillingCycle }:
       marginBottom: '-3px',
       borderColor: theme.palette.primary.main,
     },
-    ':after': {
-      content: " '-' attr(data-discount) '% / mois'",
+    '> span': {
       position: 'absolute',
       top: '70px',
       right: '10px',
@@ -46,8 +45,9 @@ export default function BillingCycleSelection({ billingCycle, setBillingCycle }:
       onChange={(event, value) => setBillingCycle(value)}
     >
       {months.map(({ value, label, discount }) => (
-        <MonthButton key={value} value={value.toString()} aria-label={label} data-discount={discount}>
+        <MonthButton key={value} value={value.toString()} aria-label={label}>
           {label}
+          {discount && <span>-{discount}% / mois</span>}
         </MonthButton>
       ))}
     </ToggleButtonGroup>
